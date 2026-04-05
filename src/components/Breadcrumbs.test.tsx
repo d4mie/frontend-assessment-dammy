@@ -8,13 +8,13 @@ describe("Breadcrumbs", () => {
     render(
       <Breadcrumbs
         items={[
-          { label: "Products", href: "/products" },
+          { label: "the shelf", href: "/products" },
           { label: "Example Product" },
         ]}
       />,
     );
 
-    const productsLink = screen.getByRole("link", { name: "Products" });
+    const productsLink = screen.getByRole("link", { name: "the shelf" });
     expect(productsLink).toHaveAttribute("href", "/products");
 
     const current = screen.getByText("Example Product");

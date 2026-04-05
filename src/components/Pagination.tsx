@@ -41,7 +41,7 @@ export function Pagination({ page, pageCount, q, category }: PaginationProps) {
   const items = getPaginationItems(page, pageCount);
 
   return (
-    <nav className="flex items-center justify-between gap-4" aria-label="Pagination">
+    <nav className="flex items-center justify-between gap-4" aria-label="Page through the shelf">
       <Link
         href={hrefFor(Math.max(1, page - 1))}
         aria-disabled={page <= 1}
@@ -53,7 +53,7 @@ export function Pagination({ page, pageCount, q, category }: PaginationProps) {
             : "border-zinc-200 bg-white text-zinc-900 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-50 dark:hover:bg-zinc-900",
         ].join(" ")}
       >
-        Prev
+        Previous
       </Link>
 
       <ol className="flex items-center gap-2">

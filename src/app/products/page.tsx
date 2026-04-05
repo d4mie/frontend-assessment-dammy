@@ -6,6 +6,7 @@ import { ProductCard } from "@/features/products/components/ProductCard";
 import { SearchFilters } from "@/features/products/components/SearchFilters";
 import { getProductCategories, getProductsPage } from "@/lib/dummyjson/products";
 import { parseProductsSearchParams, type SearchParams } from "@/features/products/lib/searchParams";
+import { LISTING_HEADLINE } from "@/lib/site-copy";
 import { buildUrl } from "@/lib/url";
 
 export const dynamic = "force-dynamic";
@@ -44,18 +45,23 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
   const start = productsPage.total === 0 ? 0 : (productsPage.page - 1) * productsPage.limit + 1;
   const end = start === 0 ? 0 : start + productsPage.items.length - 1;
 
+  const hasFilters = Boolean(q || validCategory);
+
+  const introLine =
+    productsPage.total === 0
+      ? hasFilters
+        ? "We didn’t find anything this time."
+        : "Nothing’s on the shelf yet."
+      : `You’re viewing ${start.toLocaleString()}–${end.toLocaleString()} of ${productsPage.total.toLocaleString()}.`;
+
   return (
     <div className="flex flex-1 flex-col bg-zinc-50 dark:bg-black">
       <div className="mx-auto w-full max-w-6xl px-4 py-10">
         <header className="flex flex-col gap-2">
           <h1 className="text-2xl font-semibold tracking-tight text-zinc-950 dark:text-zinc-50">
-            Products
+            {LISTING_HEADLINE}
           </h1>
-          <p className="text-sm text-zinc-600 dark:text-zinc-400">
-            {productsPage.total === 0
-              ? "No results"
-              : `Showing ${start.toLocaleString()}–${end.toLocaleString()} of ${productsPage.total.toLocaleString()}`}
-          </p>
+          <p className="text-sm text-zinc-600 dark:text-zinc-400">{introLine}</p>
         </header>
 
         <section className="mt-6 rounded-2xl border border-zinc-200 bg-white p-4 shadow-sm dark:border-zinc-800 dark:bg-zinc-950">
@@ -69,17 +75,17 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
 
         <section className="mt-8" aria-labelledby="results-heading">
           <h2 id="results-heading" className="sr-only">
-            Results
+            Product results
           </h2>
           {productsPage.total === 0 ? (
             <EmptyState
-              title="No products found"
+              title={hasFilters ? "No luck this time" : "All quiet for now"}
               description={
-                q || validCategory
-                  ? "Try a different search term or broaden your filters."
-                  : "No products are available right now."
+                hasFilters
+                  ? "Loosen the search or try another category."
+                  : "There aren’t any products in the catalog right now."
               }
-              resetHref={q || validCategory ? "/products" : undefined}
+              resetHref={hasFilters ? "/products" : undefined}
             />
           ) : (
             <>

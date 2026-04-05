@@ -11,7 +11,7 @@ export function EmptyState({
   title,
   description,
   resetHref,
-  resetLabel = "Clear filters",
+  resetLabel = "Start over",
 }: EmptyStateProps) {
   return (
     <section className="rounded-2xl border border-dashed border-zinc-300 bg-zinc-50 p-8 text-center dark:border-zinc-800 dark:bg-zinc-950">

@@ -40,19 +40,19 @@ export function ProductCard({ product, priorityImage = false }: ProductCardProps
         <dl className="grid grid-cols-2 gap-x-3 gap-y-2 text-sm text-zinc-700 dark:text-zinc-300">
           <div>
             <dt className="text-xs uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
-              Rating
+              Avg. rating
             </dt>
             <dd className="font-medium tabular-nums">{product.rating.toFixed(2)}</dd>
           </div>
           <div>
             <dt className="text-xs uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
-              Stock
+              On hand
             </dt>
             <dd className="font-medium tabular-nums">{product.stock}</dd>
           </div>
           <div className="col-span-2">
             <dt className="text-xs uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
-              Category
+              Aisle
             </dt>
             <dd className="font-medium">{product.category}</dd>
           </div>

@@ -7,6 +7,7 @@ import { SmartImage } from "@/components/SmartImage";
 import { RelatedProducts, RelatedProductsSkeleton } from "@/features/products/components/RelatedProducts";
 import { getProductById } from "@/lib/dummyjson/products";
 import { formatPriceUSD } from "@/lib/format";
+import { SITE_NAME } from "@/lib/site-copy";
 
 type PageProps = {
   params: Promise<{ id: string }>;
@@ -20,7 +21,7 @@ function parseId(raw: string) {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id: rawId } = await params;
   const id = parseId(rawId);
-  if (!id) return { title: "Product not found" };
+  if (!id) return { title: "Can’t find that item" };
 
   try {
     const product = await getProductById(id);
@@ -36,7 +37,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       },
     };
   } catch {
-    return { title: "Product not found" };
+    return { title: "Can’t find that item" };
   }
 }
 
@@ -53,7 +54,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
       <div className="mx-auto w-full max-w-5xl px-4 py-10">
         <Breadcrumbs
           items={[
-            { label: "Products", href: "/products" },
+            { label: SITE_NAME, href: "/products" },
             { label: product.title },
           ]}
         />
@@ -106,7 +107,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
                 {product.discountPercentage.toFixed(0)}% off
               </div>
               <div className="text-sm text-zinc-600 dark:text-zinc-400">
-                Rating{" "}
+                Shoppers rate it{" "}
                 <span className="font-semibold tabular-nums text-zinc-900 dark:text-zinc-200">
                   {product.rating.toFixed(2)}
                 </span>
@@ -120,7 +121,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
             <dl className="mt-6 grid grid-cols-2 gap-4 text-sm">
               <div className="rounded-xl bg-zinc-50 p-3 dark:bg-zinc-900">
                 <dt className="text-xs font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
-                  Brand
+                  Maker
                 </dt>
                 <dd className="mt-1 font-semibold text-zinc-900 dark:text-zinc-50">
                   {product.brand}
@@ -128,7 +129,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
               </div>
               <div className="rounded-xl bg-zinc-50 p-3 dark:bg-zinc-900">
                 <dt className="text-xs font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
-                  Category
+                  Aisle
                 </dt>
                 <dd className="mt-1 font-semibold text-zinc-900 dark:text-zinc-50">
                   {product.category}
@@ -136,7 +137,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
               </div>
               <div className="rounded-xl bg-zinc-50 p-3 dark:bg-zinc-900">
                 <dt className="text-xs font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
-                  Stock
+                  On hand
                 </dt>
                 <dd className="mt-1 font-semibold text-zinc-900 dark:text-zinc-50">
                   {product.stock}
@@ -154,7 +155,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
 
             <div className="mt-6 rounded-2xl border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950">
               <h2 className="text-sm font-semibold text-zinc-900 dark:text-zinc-50">
-                Shipping & warranty
+                Before it arrives
               </h2>
               <ul className="mt-2 space-y-1 text-sm text-zinc-700 dark:text-zinc-300">
                 <li>{product.shippingInformation}</li>
@@ -167,7 +168,9 @@ export default async function ProductDetailPage({ params }: PageProps) {
 
         {product.reviews.length > 0 ? (
           <section className="mt-10">
-            <h2 className="text-lg font-semibold text-zinc-950 dark:text-zinc-50">Reviews</h2>
+            <h2 className="text-lg font-semibold text-zinc-950 dark:text-zinc-50">
+              What people are saying
+            </h2>
             <div className="mt-4 grid gap-4 md:grid-cols-2">
               {product.reviews.slice(0, 4).map((r, idx) => (
                 <article

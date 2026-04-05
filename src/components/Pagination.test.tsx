@@ -7,7 +7,7 @@ describe("Pagination", () => {
   it("disables Prev on the first page", () => {
     render(<Pagination page={1} pageCount={3} q="phone" category="beauty" />);
 
-    const prev = screen.getByRole("link", { name: "Prev" });
+    const prev = screen.getByRole("link", { name: "Previous" });
     expect(prev).toHaveAttribute("aria-disabled", "true");
     expect(prev).toHaveAttribute("tabindex", "-1");
     expect(prev).toHaveAttribute("href", "/products?page=1&q=phone&category=beauty");

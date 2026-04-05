@@ -12,10 +12,12 @@ export async function RelatedProducts({ category, currentId }: RelatedProductsPr
 
   if (related.length === 0) return null;
 
+  const aisle = category.replaceAll("-", " ");
+
   return (
     <section className="mt-10">
       <h2 className="text-lg font-semibold text-zinc-950 dark:text-zinc-50">
-        More in <span className="capitalize">{category.replaceAll("-", " ")}</span>
+        Also on the shelf · <span className="capitalize">{aisle}</span>
       </h2>
       <div className="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {related.map((product) => (
