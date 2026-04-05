@@ -30,10 +30,9 @@ Then open `http://localhost:3000` (the home route redirects to `/products`).
 
 ### Environment variables
 
-Keys are documented in `.env.example`:
-
-- **`NEXT_PUBLIC_SITE_URL`**: recommended for correct absolute metadata URLs in production (e.g. `https://your-deployment.example`).
-- **`DUMMYJSON_BASE_URL`**: optional override (defaults to `https://dummyjson.com`).
+- **`NEXT_PUBLIC_SITE_URL`**: canonical value for **Cloudflare Workers** lives in **`wrangler.jsonc` → `vars`** (used on `npm run deploy`). Do not duplicate it in the dashboard unless you keep them identical—Wrangler applies the file and can override dashboard settings.
+- **Local / OpenNext builds**: copy **`.dev.vars.example`** to **`.dev.vars`** and keep `NEXT_PUBLIC_SITE_URL` aligned with `wrangler.jsonc` (OpenNext reads `.dev.vars` during build).
+- **`DUMMYJSON_BASE_URL`**: optional override (defaults to `https://dummyjson.com`). See `.env.example`.
 
 ### Scripts
 

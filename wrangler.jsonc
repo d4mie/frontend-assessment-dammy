@@ -23,5 +23,9 @@
 		// Enable image optimization
 		// see https://opennext.js.org/cloudflare/howtos/image
 		"binding": "IMAGES"
+	},
+	// Canonical site URL for metadata (metadataBase). Applied on deploy; keep dashboard vars in sync or remove them there.
+	"vars": {
+		"NEXT_PUBLIC_SITE_URL": "https://frontend-assessment-dammy.damio-ogunnaike.workers.dev"
 	}
 }

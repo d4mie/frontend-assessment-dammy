@@ -1,0 +1,2 @@
+# Copy to `.dev.vars` for local `next build` / OpenNext (same value as wrangler.jsonc → vars).
+NEXT_PUBLIC_SITE_URL=https://frontend-assessment-dammy.damio-ogunnaike.workers.dev
